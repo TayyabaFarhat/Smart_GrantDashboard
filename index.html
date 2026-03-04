@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CMACED · Startup Intelligence · Superior University × ID92</title>
+  <meta name="description" content="Discover verified startup competitions, grants, accelerators and hackathons — updated daily by CMACED Superior University powered by ID92."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- ████ NAVBAR ████ -->
+  <header class="navbar" id="navbar">
+    <div class="nav-wrap">
+
+      <!-- Brand -->
+      <div class="nav-brand">
+        <a href="#" class="brand-lockup">
+          <div class="brand-icon">
+            <span>C</span>
+          </div>
+          <div class="brand-labels">
+            <span class="brand-primary">CMACED</span>
+            <span class="brand-secondary">Superior University</span>
+          </div>
+        </a>
+        <div class="nav-pipe"></div>
+        <div class="id92-wrap">
+          <span class="id92-eyebrow">Powered by</span>
+          <span class="id92-name">ID92</span>
+        </div>
+      </div>
+
+      <!-- Center title (desktop) -->
+      <div class="nav-center-title">
+        Startup Intelligence Dashboard
+      </div>
+
+      <!-- Right controls -->
+      <div class="nav-controls">
+        <div class="live-chip" id="liveChip">
+          <span class="live-dot"></span>
+          <span id="liveText">Live</span>
+        </div>
+        <button class="icon-btn" id="themeBtn" title="Toggle theme" aria-label="Toggle colour theme">
+          <svg id="sunIcon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3.05 3.05l1.06 1.06M11.89 11.89l1.06 1.06M3.05 12.95l1.06-1.06M11.89 4.11l1.06-1.06" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <svg id="moonIcon" width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:none"><path d="M13.5 10.5A6 6 0 015.5 2.5a6 6 0 008 8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="export-btn" id="exportBtn">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v7.5M4 6.5l2.5 2.5L9 6.5M1.5 10.5v.5a1 1 0 001 1h8a1 1 0 001-1v-.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Export CSV
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ████ HERO ████ -->
+  <section class="hero">
+    <div class="hero-noise"></div>
+    <div class="hero-lines"></div>
+    <div class="hero-wrap">
+      <div class="hero-label">
+        <span class="hero-dot"></span>
+        Verified · Official Sources · Updated Every 24 Hours
+      </div>
+      <h1 class="hero-h1">
+        Startup Opportunity<br/>
+        <em>Intelligence</em> Dashboard
+      </h1>
+      <p class="hero-p">
+        Discover startup competitions, grants, accelerators and hackathons
+        curated from official sources for Pakistani entrepreneurs.
+      </p>
+      <div class="hero-stats" id="heroStats">
+        <div class="hstat">
+          <div class="hstat-n" id="hTotal">—</div>
+          <div class="hstat-l">Total Active</div>
+        </div>
+        <div class="hstat-div"></div>
+        <div class="hstat">
+          <div class="hstat-n pk" id="hNational">—</div>
+          <div class="hstat-l">🇵🇰 Pakistan</div>
+        </div>
+        <div class="hstat-div"></div>
+        <div class="hstat">
+          <div class="hstat-n intl" id="hIntl">—</div>
+          <div class="hstat-l">🌍 International</div>
+        </div>
+        <div class="hstat-div"></div>
+        <div class="hstat">
+          <div class="hstat-n urgent" id="hClosing">—</div>
+          <div class="hstat-l">⏳ Closing Soon</div>
+        </div>
+        <div class="hstat-div"></div>
+        <div class="hstat">
+          <div class="hstat-n mono" id="hUpdated">—</div>
+          <div class="hstat-l">Last Updated</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ████ STAT CARDS ████ -->
+  <section class="statcards-section">
+    <div class="statcards-wrap">
+      <div class="scard" data-c="indigo">
+        <div class="scard-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2" y="3" width="18" height="16" rx="2.5" stroke="currentColor" stroke-width="1.5"/><path d="M7 8h8M7 11.5h8M7 15h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="scard-body">
+          <div class="scard-n" id="scTotal">—</div>
+          <div class="scard-l">All Opportunities</div>
+        </div>
+      </div>
+      <div class="scard" data-c="emerald">
+        <div class="scard-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2C6.5 2 3 6 3 10.5c0 5.5 8 11 8 11s8-5.5 8-11C19 6 15.5 2 11 2z" stroke="currentColor" stroke-width="1.5"/><circle cx="11" cy="10" r="3" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <div class="scard-body">
+          <div class="scard-n" id="scNational">—</div>
+          <div class="scard-l">Pakistan Programs</div>
+        </div>
+      </div>
+      <div class="scard" data-c="violet">
+        <div class="scard-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.5"/><path d="M11 2.5s3.5 3.5 3.5 8.5-3.5 8.5-3.5 8.5M11 2.5S7.5 6 7.5 11s3.5 8.5 3.5 8.5M2.5 11h17" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <div class="scard-body">
+          <div class="scard-n" id="scIntl">—</div>
+          <div class="scard-l">International</div>
+        </div>
+      </div>
+      <div class="scard" data-c="amber">
+        <div class="scard-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.5"/><path d="M11 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="scard-body">
+          <div class="scard-n" id="scClosing">—</div>
+          <div class="scard-l">Closing ≤7 days</div>
+        </div>
+      </div>
+      <div class="scard" data-c="rose">
+        <div class="scard-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2l1.5 5.5h5.5L14 11l1.5 5.5L11 13l-4.5 3.5L8 11 4 7.5h5.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="scard-body">
+          <div class="scard-n" id="scNew">—</div>
+          <div class="scard-l">New (48 hrs)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ████ MAIN ████ -->
+  <main class="main-wrap">
+
+    <!-- Sidebar Filters -->
+    <aside class="filters-panel" id="filtersPanel">
+      <div class="fp-section">
+        <div class="fp-label">Search</div>
+        <div class="fp-search">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10 10l2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          <input type="text" id="searchInput" placeholder="Programs, orgs, grants…" autocomplete="off"/>
+          <button id="searchClear" class="search-x" title="Clear">✕</button>
+        </div>
+      </div>
+
+      <div class="fp-section">
+        <div class="fp-label">Region</div>
+        <div class="fp-radio-group" id="regionGroup">
+          <label class="fp-radio"><input type="radio" name="region" value="" checked/><span>All Regions</span></label>
+          <label class="fp-radio"><input type="radio" name="region" value="national"/><span>🇵🇰 Pakistan Only</span></label>
+          <label class="fp-radio"><input type="radio" name="region" value="international"/><span>🌍 International</span></label>
+        </div>
+      </div>
+
+      <div class="fp-section">
+        <div class="fp-label">Category</div>
+        <div class="fp-check-group" id="categoryGroup">
+          <label class="fp-check"><input type="checkbox" name="type" value="grant"/><span>Grants</span></label>
+          <label class="fp-check"><input type="checkbox" name="type" value="competition"/><span>Competitions</span></label>
+          <label class="fp-check"><input type="checkbox" name="type" value="hackathon"/><span>Hackathons</span></label>
+          <label class="fp-check"><input type="checkbox" name="type" value="accelerator"/><span>Accelerators</span></label>
+          <label class="fp-check"><input type="checkbox" name="type" value="fellowship"/><span>Fellowships</span></label>
+        </div>
+      </div>
+
+      <div class="fp-section">
+        <div class="fp-label">Sort By</div>
+        <select class="fp-select" id="sortSelect">
+          <option value="deadline">Deadline (soonest)</option>
+          <option value="new">Newest Added</option>
+          <option value="prize">Prize (highest)</option>
+          <option value="credibility">Most Verified</option>
+        </select>
+      </div>
+
+      <div class="fp-section">
+        <div class="fp-label">Credibility</div>
+        <div class="fp-range-wrap">
+          <input type="range" id="credRange" min="0" max="100" value="0" class="fp-range"/>
+          <div class="fp-range-label">Min score: <span id="credVal">0</span></div>
+        </div>
+      </div>
+
+      <button class="fp-reset" id="resetBtn">Reset Filters</button>
+    </aside>
+
+    <!-- Content -->
+    <div class="content-col">
+
+      <!-- Tabs -->
+      <div class="tabs-bar">
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-tab="all">All</button>
+          <button class="tab" data-tab="national">🇵🇰 National</button>
+          <button class="tab" data-tab="international">🌍 International</button>
+          <button class="tab" data-tab="grant">Grants</button>
+          <button class="tab" data-tab="competition">Competitions</button>
+          <button class="tab" data-tab="hackathon">Hackathons</button>
+          <button class="tab" data-tab="accelerator">Accelerators</button>
+          <button class="tab" data-tab="fellowship">Fellowships</button>
+          <button class="tab tab-warn" data-tab="closing">⏳ Closing</button>
+          <button class="tab tab-dim" data-tab="archive">Archive</button>
+        </div>
+        <div class="tab-meta" id="tabMeta"></div>
+      </div>
+
+      <!-- Skeleton -->
+      <div id="skeletons" class="opp-grid">
+        <div class="skel"></div><div class="skel"></div>
+        <div class="skel"></div><div class="skel"></div>
+        <div class="skel"></div><div class="skel"></div>
+      </div>
+
+      <!-- Grid -->
+      <div id="oppGrid" class="opp-grid" style="display:none"></div>
+
+      <!-- Empty -->
+      <div id="emptyState" class="empty-state" style="display:none">
+        <div class="empty-graphic">
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none"><circle cx="28" cy="28" r="24" stroke="currentColor" stroke-width="1.5" stroke-dasharray="6 4"/><path d="M22 28h12M28 22v12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3>No results found</h3>
+        <p>Try adjusting your filters or search query.</p>
+        <button class="empty-reset" id="emptyReset">Reset filters</button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ████ FOOTER ████ -->
+  <footer class="footer">
+    <div class="footer-wrap">
+      <div class="fc">
+        <div class="footer-brand-name">CMACED × ID92</div>
+        <p>Official Startup Intelligence Platform<br/>Superior University, Lahore, Pakistan</p>
+        <div class="footer-live">
+          <span class="footer-dot"></span>
+          Verified links · Updated daily
+        </div>
+      </div>
+      <div class="fc">
+        <div class="fc-head">Platform</div>
+        <a href="https://superior.edu.pk" target="_blank" rel="noopener">Superior University</a>
+        <a href="#" id="footerExport">Download Archive CSV</a>
+      </div>
+      <div class="fc">
+        <div class="fc-head">Verified Sources</div>
+        <span>ignite.org.pk · plan9.pitb.gov.pk</span>
+        <span>pseb.org.pk · hec.gov.pk</span>
+        <span>ycombinator.com · solve.mit.edu</span>
+        <span>hultprize.org · devpost.com</span>
+        <span>seedstars.com · 500.co</span>
+      </div>
+      <div class="fc">
+        <div class="fc-head">Data Standards</div>
+        <p class="fc-note">All data sourced from official program pages only. Every link validated via HTTP 200 check. Expired programs auto-archived. No fabricated entries.</p>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <span>© 2025 CMACED – Superior University × Innovation District 92</span>
+      <span id="footerBuild" class="footer-mono"></span>
+    </div>
+  </footer>
+
+  <!-- ████ MODAL ████ -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-bg" id="modalBg"></div>
+    <div class="modal-box" role="dialog" aria-modal="true">
+      <button class="modal-close" id="modalClose" aria-label="Close">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div id="modalInner"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
