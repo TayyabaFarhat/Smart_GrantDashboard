@@ -18,31 +18,34 @@
 
       <!-- Brand -->
       <div class="nav-brand">
-        <a href="#" class="brand-lockup">
-          <!-- CMACED logo: replace brand-icon div with <img src="cmaced-logo.png" ...> if you have it -->
-          <div class="brand-icon">
-            <span>C</span>
-          </div>
-          <!-- Superior University logo: PNG must have transparent background -->
-          <img
-            src="superior-logo.png"
-            alt="Superior University"
-            class="logo-superior"
-            onerror="this.style.display='none'"
-          />
-        </a>
-        <div class="nav-pipe"></div>
-        <div class="id92-wrap">
-          <span class="id92-eyebrow">Powered by</span>
-          <!-- ID92 logo: aspect ratio preserved, never stretched -->
-          <img
-            src="id92-logo.png"
-            alt="ID92"
-            class="logo-id92"
-            onerror="this.outerHTML='<span class=\'id92-name\'>ID92</span>'"
-          />
-        </div>
-      </div>
+  <a href="#" class="brand-lockup">
+    <!-- CMACED logo -->
+    <img
+      src="cmaced-logo.png"
+      alt="CMACED"
+      class="logo-cmaced"
+      onerror="this.outerHTML='<div class=\'brand-icon\'><span>C</span></div>'"
+    />
+    <!-- Superior University logo (transparent PNG) -->
+    <img
+      src="superior-logo.png"
+      alt="Superior University"
+      class="logo-superior"
+      onerror="this.outerHTML='<div class=\'brand-labels\'><span class=\'brand-primary\'>Superior University</span></div>'"
+    />
+  </a>
+  <div class="nav-pipe"></div>
+  <div class="id92-wrap">
+    <span class="id92-eyebrow">Powered by</span>
+    <!-- ID92 logo: aspect ratio preserved, never stretched -->
+    <img
+      src="ID92-logo.png"
+      alt="ID92"
+      class="logo-id92"
+      onerror="this.outerHTML='<span class=\'id92-name\'>ID92</span>'"
+    />
+  </div>
+</div>
 
       <!-- Center title (desktop) -->
       <div class="nav-center-title">
