@@ -761,3 +761,31 @@ img{display:block;max-width:100%}
   .nav-wrap{padding:0 16px}
   .content-col{padding:16px 16px 48px}
 }
+
+/* ── Logo images ─────────────────────────────────────────── */
+
+/* Superior University — transparent PNG, fixed height, natural width */
+.logo-superior {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  mix-blend-mode: multiply;
+}
+[data-theme="dark"] .logo-superior {
+  mix-blend-mode: normal;
+  filter: brightness(0) invert(1);
+}
+
+/* ID92 — aspect ratio always preserved, height-only constraint */
+.logo-id92 {
+  height: 22px;
+  width: auto;
+  max-width: 120px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+[data-theme="dark"] .logo-id92 {
+  filter: brightness(0) invert(1);
+}
