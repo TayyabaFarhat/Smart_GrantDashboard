@@ -764,7 +764,21 @@ img{display:block;max-width:100%}
 
 /* ── Logo images ─────────────────────────────────────────── */
 
-/* Superior University — transparent PNG, fixed height, natural width */
+/* ── Logo images ─────────────────────────────────────────── */
+
+/* CMACED logo */
+.logo-cmaced {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+[data-theme="dark"] .logo-cmaced {
+  filter: brightness(0) invert(1);
+}
+
+/* Superior University — mix-blend removes white background */
 .logo-superior {
   height: 32px;
   width: auto;
@@ -777,7 +791,7 @@ img{display:block;max-width:100%}
   filter: brightness(0) invert(1);
 }
 
-/* ID92 — aspect ratio always preserved, height-only constraint */
+/* ID92 — height only, width auto = aspect ratio always preserved */
 .logo-id92 {
   height: 22px;
   width: auto;
