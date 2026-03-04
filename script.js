@@ -13,6 +13,7 @@ const S = {
   query:      '',
   region:     '',
   types:      new Set(),
+  sectors:    new Set(),
   sortBy:     'deadline',
   minScore:   0,
 };
@@ -158,6 +159,9 @@ function getFiltered() {
   // Type checkboxes
   if (S.types.size > 0) pool = pool.filter(o => S.types.has(o.type));
 
+  // Sector checkboxes
+  if (S.sectors.size > 0) pool = pool.filter(o => S.sectors.has(o.sector));
+
   // Search
   if (query) pool = pool.filter(o =>
     [o.name, o.organization, o.description, o.requirements, o.country, o.type]
@@ -252,6 +256,7 @@ function buildCard(o, isArchive, idx) {
 
   const prizeChip = o.prize ? `<span class="chip prize">💰 ${esc(o.prize)}</span>` : '';
   const scoreChip = o.credibility_score ? `<span class="chip score">⭐ ${o.credibility_score}</span>` : '';
+  const sectorChip = o.sector ? `<span class="chip sector" data-sector="${esc(o.sector)}">${sectorLabel(o.sector)}</span>` : '';
 
   const applyBtn = o.application_link
     ? `<a class="btn-apply" href="${esc(o.application_link)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Apply ↗</a>`
@@ -274,7 +279,7 @@ function buildCard(o, isArchive, idx) {
       <div class="card-org">${esc(o.organization||'')}</div>
     </div>
     ${o.description ? `<p class="card-desc">${esc(o.description)}</p>` : ''}
-    <div class="card-chips">${dlChip}${prizeChip}${scoreChip}</div>
+    <div class="card-chips">${dlChip}${prizeChip}${sectorChip}${scoreChip}</div>
     <div class="card-footer">
       <span class="card-src" title="${esc(o.source_url||'')}">${esc(domainOf(o.source_url))}</span>
       <div class="card-btns">${srcBtn}${applyBtn}</div>
@@ -315,6 +320,7 @@ function openModal(id, isArchive) {
       ${mf('Deadline', dl ? fmtDate(dl) + (isClosing?' — closing soon':'') : 'Not specified')}
       ${mf('Prize / Funding', o.prize || 'Not specified')}
       ${mf('Country', o.country || 'Not specified')}
+      ${mf('Sector', o.sector ? sectorLabel(o.sector) : 'Not specified')}
       ${mf('Region', o.region === 'national' ? '🇵🇰 Pakistan' : '🌍 International')}
       ${mf('Requirements', o.requirements || 'See official page', true)}
       ${mf('Date Added', o.date_added ? fmtDate(new Date(o.date_added)) : 'N/A')}
@@ -395,6 +401,15 @@ function bindAll() {
     });
   });
 
+  // Sector checkboxes
+  document.querySelectorAll('input[name="sector"]').forEach(c => {
+    c.addEventListener('change', e => {
+      if (e.target.checked) S.sectors.add(e.target.value);
+      else S.sectors.delete(e.target.value);
+      render();
+    });
+  });
+
   // Sort
   $id('sortSelect').addEventListener('change', e => { S.sortBy = e.target.value; render(); });
 
@@ -416,10 +431,11 @@ function bindAll() {
 
 function resetAll() {
   searchInput.value = ''; S.query = '';
-  S.region = ''; S.types.clear(); S.sortBy = 'deadline'; S.minScore = 0;
+  S.region = ''; S.types.clear(); S.sectors.clear(); S.sortBy = 'deadline'; S.minScore = 0;
   searchClear.classList.remove('show');
   document.querySelectorAll('input[name="region"]')[0].checked = true;
   document.querySelectorAll('input[name="type"]').forEach(c => c.checked = false);
+  document.querySelectorAll('input[name="sector"]').forEach(c => c.checked = false);
   $id('sortSelect').value = 'deadline';
   $id('credRange').value = '0'; $id('credVal').textContent = '0';
   document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
@@ -432,7 +448,7 @@ function resetAll() {
 function exportCSV() {
   const all = S.archive;
   if (!all.length) { alert('Archive is empty.'); return; }
-  const keys = ['id','name','organization','type','country','region','deadline',
+  const keys = ['id','name','organization','type','sector','country','region','deadline',
                  'prize','description','requirements','application_link',
                  'source_url','credibility_score','date_added','status'];
   const lines = [
@@ -460,6 +476,15 @@ function fmtDate(d) {
 function domainOf(url) {
   try { return new URL(url).hostname.replace('www.',''); } catch { return url||''; }
 }
+function sectorLabel(s) {
+  const map = {
+    tech:'💻 Technology', ai:'🤖 AI / ML', fintech:'💳 FinTech',
+    social:'🌱 Social Impact', health:'🏥 HealthTech', edtech:'📚 EdTech',
+    agri:'🌾 AgriTech', energy:'⚡ CleanEnergy', ecommerce:'🛒 E-Commerce',
+    open:'🌐 Open / All Sectors',
+  };
+  return map[s] || s;
+}
 
 // ── Seed Data (fallback) ──────────────────────────────────
 function seedData() {
@@ -470,7 +495,7 @@ function seedData() {
   return [
     {
       id:'ignite-startup-fund', name:'Ignite Startup Fund',
-      organization:'Ignite National Technology Fund', type:'grant',
+      organization:'Ignite National Technology Fund', type:'grant', sector:'tech',
       country:'Pakistan', region:'national', deadline:d(45),
       prize:'PKR 5–25 million',
       description:'Government fund for early-stage Pakistani tech startups with working prototypes.',
@@ -481,7 +506,7 @@ function seedData() {
     },
     {
       id:'plan9-incubator', name:'Plan9 Incubation Program',
-      organization:'PITB – Punjab Information Technology Board', type:'accelerator',
+      organization:'PITB – Punjab Information Technology Board', type:'accelerator', sector:'tech',
       country:'Pakistan', region:'national', deadline:d(30),
       prize:'Office space + PKR 1M seed grant',
       description:'Punjab government-backed incubator for technology startups. Provides space, mentorship, and seed funding.',
@@ -492,7 +517,7 @@ function seedData() {
     },
     {
       id:'nic-lahore', name:'National Incubation Center Lahore',
-      organization:'NIC Lahore / STZA', type:'accelerator',
+      organization:'NIC Lahore / STZA', type:'accelerator', sector:'open',
       country:'Pakistan', region:'national', deadline:d(20),
       prize:'USD 10,000 + mentorship',
       description:'Pakistan\'s flagship national incubation center offering 6-month intensive program for technology startups.',
@@ -503,7 +528,7 @@ function seedData() {
     },
     {
       id:'hec-innovation', name:'HEC Innovation & Research Fund',
-      organization:'Higher Education Commission Pakistan', type:'grant',
+      organization:'Higher Education Commission Pakistan', type:'grant', sector:'open',
       country:'Pakistan', region:'national', deadline:d(35),
       prize:'PKR 2–10 million',
       description:'Competitive research and innovation grant for university-affiliated startups and researchers.',
@@ -514,7 +539,7 @@ function seedData() {
     },
     {
       id:'pseb-ites', name:'PSEB IT Export Startup Support',
-      organization:'Pakistan Software Export Board', type:'grant',
+      organization:'Pakistan Software Export Board', type:'grant', sector:'tech',
       country:'Pakistan', region:'national', deadline:d(18),
       prize:'PKR 3 million + export facilitation',
       description:'Support program for IT companies targeting international export markets.',
@@ -524,19 +549,8 @@ function seedData() {
       credibility_score:90, date_added:d(-5), status:'Open'
     },
     {
-      id:'cmaced-grant', name:'CMACED Internal Startup Grant',
-      organization:'CMACED – Superior University', type:'grant',
-      country:'Pakistan', region:'national', deadline:d(10),
-      prize:'PKR 500,000',
-      description:'Internal grant for currently enrolled Superior University students with startup ideas or working prototypes.',
-      requirements:'Currently enrolled at Superior University. Working prototype preferred.',
-      application_link:'https://superior.edu.pk',
-      source_url:'https://superior.edu.pk',
-      credibility_score:85, date_added:today, status:'Open'
-    },
-    {
       id:'lums-coe', name:'LUMS Centre for Entrepreneurship Program',
-      organization:'LUMS', type:'accelerator',
+      organization:'LUMS', type:'accelerator', sector:'open',
       country:'Pakistan', region:'national', deadline:d(40),
       prize:'Mentorship + USD 5,000 seed',
       description:'Structured entrepreneurship acceleration program with access to LUMS alumni network and mentors.',
@@ -547,7 +561,7 @@ function seedData() {
     },
     {
       id:'pm-youth-loan', name:'PM Youth Entrepreneurship Programme',
-      organization:'Prime Minister Youth Program', type:'grant',
+      organization:'Prime Minister Youth Program', type:'grant', sector:'open',
       country:'Pakistan', region:'national', deadline:d(55),
       prize:'PKR 0.5–7.5 million loan',
       description:'Federal government interest-reduced loan program for youth entrepreneurs aged 21–45.',
@@ -558,7 +572,7 @@ function seedData() {
     },
     {
       id:'yc', name:'Y Combinator Accelerator',
-      organization:'Y Combinator', type:'accelerator',
+      organization:'Y Combinator', type:'accelerator', sector:'tech',
       country:'USA', region:'international', deadline:d(60),
       prize:'USD 500,000',
       description:'The world\'s most prestigious startup accelerator. Equity-based. Open to founders from any country.',
@@ -569,7 +583,7 @@ function seedData() {
     },
     {
       id:'hult-prize', name:'Hult Prize Global Competition',
-      organization:'Hult Prize Foundation', type:'competition',
+      organization:'Hult Prize Foundation', type:'competition', sector:'social',
       country:'Global', region:'international', deadline:d(14),
       prize:'USD 1,000,000',
       description:'The Nobel Prize of student entrepreneurship. Annual global competition for university teams.',
@@ -580,7 +594,7 @@ function seedData() {
     },
     {
       id:'mit-solve', name:'MIT Solve Global Challenge',
-      organization:'MIT Solve', type:'competition',
+      organization:'MIT Solve', type:'competition', sector:'social',
       country:'USA', region:'international', deadline:d(90),
       prize:'USD 10,000–150,000',
       description:'MIT-backed social impact challenge seeking technology-based solutions to global challenges.',
@@ -591,7 +605,7 @@ function seedData() {
     },
     {
       id:'google-startups', name:'Google for Startups Accelerator',
-      organization:'Google', type:'accelerator',
+      organization:'Google', type:'accelerator', sector:'ai',
       country:'USA', region:'international', deadline:d(50),
       prize:'USD 100,000 in Cloud credits',
       description:'Equity-free accelerator for AI-first startups. Includes Google Cloud credits and expert mentorship.',
@@ -602,7 +616,7 @@ function seedData() {
     },
     {
       id:'msft-founders-hub', name:'Microsoft for Startups Founders Hub',
-      organization:'Microsoft', type:'grant',
+      organization:'Microsoft', type:'grant', sector:'ai',
       country:'USA', region:'international', deadline:d(365),
       prize:'USD 150,000 in Azure credits',
       description:'No-equity support program offering Azure credits, GitHub, and Microsoft tools for startups.',
@@ -613,7 +627,7 @@ function seedData() {
     },
     {
       id:'aws-activate', name:'AWS Activate for Startups',
-      organization:'Amazon Web Services', type:'grant',
+      organization:'Amazon Web Services', type:'grant', sector:'tech',
       country:'USA', region:'international', deadline:d(365),
       prize:'USD 5,000–100,000 in AWS credits',
       description:'AWS credits, technical support, and training for eligible startups at any stage.',
@@ -624,7 +638,7 @@ function seedData() {
     },
     {
       id:'seedstars', name:'Seedstars World Competition',
-      organization:'Seedstars World', type:'competition',
+      organization:'Seedstars World', type:'competition', sector:'tech',
       country:'Switzerland', region:'international', deadline:d(25),
       prize:'USD 500,000 investment',
       description:'Global startup competition for emerging market entrepreneurs with local qualifying rounds.',
@@ -635,7 +649,7 @@ function seedData() {
     },
     {
       id:'masschallenge', name:'MassChallenge Global Accelerator',
-      organization:'MassChallenge', type:'accelerator',
+      organization:'MassChallenge', type:'accelerator', sector:'open',
       country:'USA', region:'international', deadline:d(55),
       prize:'USD 250,000 equity-free',
       description:'Zero-equity global accelerator connecting high-impact startups with world-class mentors and resources.',
@@ -646,7 +660,7 @@ function seedData() {
     },
     {
       id:'devpost-hackathons', name:'Devpost Global Hackathons',
-      organization:'Devpost', type:'hackathon',
+      organization:'Devpost', type:'hackathon', sector:'tech',
       country:'USA', region:'international', deadline:d(7),
       prize:'Varies per hackathon',
       description:'Official hackathon platform hosting global virtual competitions open to all nationalities.',
@@ -657,7 +671,7 @@ function seedData() {
     },
     {
       id:'500-global', name:'500 Global Accelerator',
-      organization:'500 Global', type:'accelerator',
+      organization:'500 Global', type:'accelerator', sector:'fintech',
       country:'USA', region:'international', deadline:d(42),
       prize:'USD 150,000 investment',
       description:'Early-stage VC fund and accelerator with global portfolio. Open to Pakistani founders.',
@@ -668,7 +682,7 @@ function seedData() {
     },
     {
       id:'plug-play', name:'Plug and Play Tech Center',
-      organization:'Plug and Play', type:'accelerator',
+      organization:'Plug and Play', type:'accelerator', sector:'fintech',
       country:'USA', region:'international', deadline:d(70),
       prize:'Investment + USD 25,000',
       description:'Silicon Valley accelerator specializing in industry-specific programs. Global network of corporate partners.',
@@ -679,7 +693,7 @@ function seedData() {
     },
     {
       id:'un-sdg-challenge', name:'UN SDG Innovation Challenge',
-      organization:'United Nations', type:'competition',
+      organization:'United Nations', type:'competition', sector:'social',
       country:'Global', region:'international', deadline:d(80),
       prize:'USD 50,000–300,000',
       description:'UN challenge seeking technology solutions aligned with Sustainable Development Goals.',

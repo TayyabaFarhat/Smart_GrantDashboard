@@ -110,17 +110,6 @@
     "notes": "Federal PM youth entrepreneurship programs"
   },
   {
-    "id": "superior-cmaced",
-    "name": "CMACED – Superior University",
-    "country": "Pakistan",
-    "region": "national",
-    "type": "university",
-    "base_url": "https://superior.edu.pk",
-    "crawl_pages": ["/cmaced", "/entrepreneurship", "/"],
-    "credibility_base": 85,
-    "notes": "Centre for Management, Commerce and Entrepreneurship Development"
-  },
-  {
     "id": "lums-coe",
     "name": "LUMS Centre for Entrepreneurship",
     "country": "Pakistan",

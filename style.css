@@ -764,7 +764,31 @@ img{display:block;max-width:100%}
 
 /* ── Logo images ─────────────────────────────────────────── */
 
-/* ── Logo images ─────────────────────────────────────────── */
+/* Superior University — transparent PNG, fixed height, natural width */
+.logo-superior {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  mix-blend-mode: multiply;
+}
+[data-theme="dark"] .logo-superior {
+  mix-blend-mode: normal;
+  filter: brightness(0) invert(1);
+}
+
+/* ID92 — aspect ratio always preserved, height-only constraint */
+.logo-id92 {
+  height: 22px;
+  width: auto;
+  max-width: 120px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+[data-theme="dark"] .logo-id92 {
+  filter: brightness(0) invert(1);
+}
 
 /* CMACED logo */
 .logo-cmaced {
@@ -778,28 +802,14 @@ img{display:block;max-width:100%}
   filter: brightness(0) invert(1);
 }
 
-/* Superior University — mix-blend removes white background */
-.logo-superior {
-  height: 32px;
-  width: auto;
-  object-fit: contain;
-  display: block;
-  mix-blend-mode: multiply;
-}
-[data-theme="dark"] .logo-superior {
-  mix-blend-mode: normal;
-  filter: brightness(0) invert(1);
-}
-
-/* ID92 — height only, width auto = aspect ratio always preserved */
-.logo-id92 {
-  height: 22px;
-  width: auto;
-  max-width: 120px;
-  object-fit: contain;
-  display: block;
-  flex-shrink: 0;
-}
-[data-theme="dark"] .logo-id92 {
-  filter: brightness(0) invert(1);
-}
+/* ── Sector chips ────────────────────────────────────────── */
+.chip.sector { background: var(--ind-bg); color: var(--ind); border-color: var(--ind-border); }
+.chip.sector[data-sector="ai"]       { background: var(--violet-bg); color: var(--violet); border-color: rgba(124,58,237,0.3); }
+.chip.sector[data-sector="fintech"]  { background: var(--emerald-bg); color: var(--emerald); border-color: rgba(13,148,105,0.3); }
+.chip.sector[data-sector="social"]   { background: var(--amber-bg); color: var(--amber); border-color: rgba(217,119,6,0.3); }
+.chip.sector[data-sector="health"]   { background: var(--rose-bg); color: var(--rose); border-color: rgba(220,38,38,0.3); }
+.chip.sector[data-sector="edtech"]   { background: var(--sky-bg); color: var(--sky); border-color: rgba(2,132,199,0.3); }
+.chip.sector[data-sector="agri"]     { background: var(--emerald-bg); color: var(--emerald); border-color: rgba(13,148,105,0.3); }
+.chip.sector[data-sector="energy"]   { background: var(--amber-bg); color: var(--amber); border-color: rgba(217,119,6,0.3); }
+.chip.sector[data-sector="ecommerce"]{ background: var(--violet-bg); color: var(--violet); border-color: rgba(124,58,237,0.3); }
+.chip.sector[data-sector="open"]     { background: var(--bg-2); color: var(--ink-3); border-color: var(--border-3); }
